@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小帆船——数字出海</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@500;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0b111a', surface: '#141c27', border: '#243244', borderHover: '#3a5475',
+            accent: '#6cb6ff', accentSoft: '#9fd0ff', accentDim: '#1c436e', text: '#e6eef8',
+            dim: '#a4b4c8', muted: '#7d8ea5', success: '#7dd3fc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            display: ['Syne', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0b111a; background-image: linear-gradient(rgba(108,182,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(108,182,255,0.04) 1px, transparent 1px); background-size: 40px 40px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #e6eef8; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0b111a; }
+    ::-webkit-scrollbar-thumb { background: #243244; border-radius: 999px; }
+    .nav-blur { backdrop-filter: blur(14px) saturate(180%); -webkit-backdrop-filter: blur(14px) saturate(180%); background: rgba(11, 17, 26, 0.84); border-bottom: 1px solid rgba(108,182,255,0.08); }
+    .card { background: rgba(20, 28, 39, 0.94); border: 1px solid #243244; border-radius: 16px; transition: all .25s ease; }
+    .card:hover { border-color: #3a5475; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.34), 0 0 0 1px rgba(108,182,255,0.07); }
+    .video-card { background: rgba(20, 28, 39, 0.96); border: 1px solid #2b4667; border-radius: 18px; transition: all 0.3s ease; }
+    .video-card:hover { border-color: #6cb6ff; box-shadow: 0 0 36px rgba(108,182,255,0.10); }
+    .tag { display: inline-flex; align-items: center; background: rgba(108,182,255,0.10); border: 1px solid rgba(108,182,255,0.18); border-radius: 999px; color: #9fd0ff; font-size: 13px; padding: 5px 11px; line-height: 1; white-space: nowrap; }
+    .tag-muted { background: transparent; color: #a4b4c8; border-color: #2c3a4d; }
+    .arrow-btn { width: 32px; height: 32px; border: 1px solid #2a394b; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #93a7be; font-size: 14px; transition: all .2s ease; flex-shrink: 0; }
+    .card:hover .arrow-btn { background: rgba(108,182,255,0.10); border-color: #6cb6ff; color: #6cb6ff; }
+    .widget { background: rgba(20, 28, 39, 0.94); border: 1px solid #243244; border-radius: 16px; padding: 20px; }
+    .widget-title { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #7d8ea5; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; }
+    .dot-live { width: 8px; height: 8px; border-radius: 999px; background: #6cb6ff; box-shadow: 0 0 8px #6cb6ff; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+    .bar { background: rgba(108,182,255,0.10); border-radius: 999px; overflow: hidden; }
+    .bar-fill { background: linear-gradient(90deg, #29578d, #6cb6ff); border-radius: 999px; height: 100%; transition: width 1s ease; }
+    .avatar-ring { background: conic-gradient(#6cb6ff 0%, #244a76 60%, #6cb6ff 100%); border-radius: 999px; padding: 2px; }
+    .avatar-inner { background: #0b111a; border-radius: 999px; padding: 3px; }
+    .cat-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1b2532; font-size: 15px; color: #a4b4c8; cursor: pointer; transition: color 0.2s ease; }
+    .cat-item:last-child { border-bottom: none; }
+    .cat-item:hover { color: #e6eef8; }
+    .iframe-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #0d1520; border: 1px solid #223247; }
+    .iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  </style>
+</head>
+<body class="min-h-screen text-text">
+
+  <nav class="nav-blur fixed top-0 left-0 right-0 z-50 h-20 flex items-center px-6 md:px-10">
+    <div class="w-full max-w-[1600px] mx-auto flex items-center justify-between">
+      <div class="flex items-center shrink-0 cursor-pointer pl-10 md:pl-20">
+        <div class="flex items-center tracking-tighter">
+          <img src="logo.jpg" alt="Logo" class="h-10 w-auto mr-4 rounded-md object-contain">
+          <span class="font-display font-[500] text-accent text-[22px] md:text-[24px] opacity-90">数字出海全链路实操</span>
+        </div>
+      </div>
+
+      <div class="hidden xl:flex items-center gap-10 text-white text-[20px] font-bold tracking-tight">
+        <a href="#" class="nav-filter hover:text-accent transition-colors">首页</a>
+        <a href="#" class="nav-filter hover:text-accent transition-colors">机场&VPS</a>
+        <a href="#" class="nav-filter hover:text-accent transition-colors">手机&eSIM</a>
+        <a href="#" class="nav-filter hover:text-accent transition-colors text-[19px]">银行&券商&交易所</a>
+        <a href="#" class="nav-filter hover:text-accent transition-colors text-[19px]">港美股&加密货币</a>
+        <a href="#" class="nav-filter hover:text-accent transition-colors">各类工具</a>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0 pl-6 border-l border-white/10 ml-4">
+        <div class="relative flex items-center justify-center">
+          <div class="dot-live scale-150"></div>
+          <div class="absolute w-5 h-5 bg-accent opacity-20 animate-ping rounded-full"></div>
+        </div>
+        <span class="text-white font-black tracking-[0.2em] text-[16px] uppercase hidden sm:inline">Online</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrap max-w-[1400px] mx-auto px-4 pt-28 pb-12">
+    <div class="layout-grid grid gap-5" style="grid-template-columns: minmax(0,2.2fr) minmax(0,7.2fr) minmax(0,2.6fr); align-items:start;">
+
+      <aside class="left-col flex flex-col gap-4 sticky top-24">
+        <div class="widget">
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="avatar-ring" style="width:64px;height:64px;">
+              <div class="avatar-inner w-full h-full flex items-center justify-center overflow-hidden">
+                <img src="logo.jpg" alt="Logo" class="w-full h-full object-cover rounded-full">
+              </div>
+            </div>
+            <div>
+              <div class="font-display font-semibold text-text text-[19px]">小帆船</div>
+              <div class="text-dim mt-1 text-[14px]">数字出海全链路实操</div>
+            </div>
+            <div class="flex gap-2 flex-wrap justify-center mt-1">
+              <span class="tag">eSIM</span><span class="tag">VPN</span><span class="tag">券商</span>
+            </div>
+            <p class="text-dim mt-1 text-[15px] leading-8">专注数字出海全链路实操，让跨境金融与网络连接更简单。</p>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">分类</div>
+          <div class="cat-item"><span>机场&VPS</span><span class="cat-count">14</span></div>
+          <div class="cat-item"><span>手机&eSIM</span><span class="cat-count">9</span></div>
+          <div class="cat-item"><span>银行&券商&交易所</span><span class="cat-count">11</span></div>
+          <div class="cat-item"><span>港美股/加密货币</span><span class="cat-count">7</span></div>
+          <div class="cat-item"><span>各类工具</span><span class="cat-count">7</span></div>
+        </div>
+      </aside>
+
+      <main class="flex flex-col gap-5">
+        <div class="header-strip flex items-center justify-between gap-4 pt-1">
+          <div>
+            <h1 id="main-title" class="font-display font-semibold text-text text-[24px] md:text-[26px] tracking-[0.01em]">最新文章</h1>
+            <p class="text-dim mt-1 text-[15px] md:text-[16px]">记录折腾过程，分享真实体验</p>
+          </div>
+        </div>
+
+        <div class="article-grid grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </main>
+
+      <aside class="right-col flex flex-col gap-4 sticky top-24">
+        <div class="widget">
+          <div class="widget-title">热门文章</div>
+          <div id="hot-posts-container" class="flex flex-col gap-3"></div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">本月流量来源</div>
+          <div class="flex flex-col gap-4">
+            <div><div class="flex justify-between mb-1.5"><span class="text-dim text-[15px]">搜索引擎</span><span class="text-accent text-[15px]">58%</span></div><div class="bar h-2"><div class="bar-fill" style="width:58%"></div></div></div>
+            <div><div class="flex justify-between mb-1.5"><span class="text-dim text-[15px]">YouTube</span><span class="text-accent text-[15px]">24%</span></div><div class="bar h-2"><div class="bar-fill" style="width:24%"></div></div></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const posts = [
+      { title: "不到3美元！德国三网双程精品VPS实测", date: "2026-04-16", category: "机场&VPS", description: "CN2 GIA / 9929 / CMIN2 精品线路，自带德国原生IP+500M大带宽。", youtubeId: "fIOAuhNVVUk", tags: ["德国", "CN2 GIA"] },
+      { title: "eSIM六边形战士：免实名+香港号实测", date: "2026-04-10", category: "手机&eSIM", description: "KiteSim实测，3美分起，完美解锁ChatGPT/TikTok，自带香港号码。", youtubeId: "eCgsKnOyFQw", tags: ["免实名", "香港号"] },
+      { title: "Jtti 东京VPS深度实测：家宽属性IP", date: "2026-03-18", category: "机场&VPS", description: "三网4837回程，200Mbps独享，完美解锁日区流媒体与AI服务。", youtubeId: "ggra3-OA-jw", tags: ["东京", "家宽IP"] },
+      { title: "欧元回国双零损耗实测（2026最新）", date: "2026-03-12", category: "银行&券商&交易所", description: "3分钟到账！分享如何将海外欧元无损转入国内支付宝/微信。", youtubeId: "k13h_KNpT3E", tags: ["无损", "欧元回国"] },
+      { title: "德区 Kraken 深度实测：拿100€奖励", date: "2026-03-05", category: "港美股&加密货币", description: "开通德国本土IBAN，自带实体卡返现，打通法币出入金闭环。", youtubeId: "Yc-QYfIAHck", tags: ["Kraken", "德国IBAN"] },
+      { title: "7美元/年！日本VPS实测：全绿解封", date: "2026-02-25", category: "机场&VPS", description: "春节特惠神机，三网直连，油管4K稳跑18万，原生IP属性极强。", youtubeId: "Q-fDNzlOy_I", tags: ["性价比", "日本"] },
+      { title: "德区 OKX 深度实测：150€新客奖励", date: "2026-02-12", category: "港美股&加密货币", description: "下发个人名下德国IBAN，SEPA秒到账，消费卡享15%高额返现。", youtubeId: "mtXV03saaMA", tags: ["OKX", "高额返现"] },
+      { title: "德区 PayPal 全攻略：0换汇收付", date: "2026-02-06", category: "银行&券商&交易所", description: "无需税号解锁Google Pay虚拟万事达卡，欧元原位结算避坑指南。", youtubeId: "JFs7tg0KViQ", tags: ["PayPal", "德国"] },
+      { title: "美西小钢炮实测：9929/CMIN2双优化", date: "2026-01-29", category: "机场&VPS", description: "AMD核心性能怪兽，单核破千，原生IP解锁全家桶，3美元/月起。", youtubeId: "bnMvrvSDHiA", tags: ["美西", "高性能"] },
+      { title: "Bybit EU 闭环实操：50U奖励+返现", date: "2026-01-21", category: "港美股&加密货币", description: "用中国护照+德国三件套拿下欧洲特供卡，10%消费返现全记录。", youtubeId: "vsf8vJzQh_4", tags: ["Bybit", "合规出金"] },
+      { title: "iPhone 17 配合 Xesim 开通德国沃达丰", date: "2026-01-13", category: "手机&eSIM", description: "0成本喜提8588靓号，沃达丰原生卡激活动作拆解，全功能漫游。", youtubeId: "ehi7F_gX7UE", tags: ["Vodafone", "iPhone"] },
+      { title: "Servitro 德国原生 IP VPS 复测", date: "2025-12-31", category: "机场&VPS", description: "新年最高4折优惠，免费升级双倍配置，支持免费更换IP。", youtubeId: "4XDvKF4Z0n0", tags: ["德国原生", "免费升级"] },
+      { title: "五大海外流媒体拼车最稳方案", date: "2025-12-17", category: "各类工具", description: "1元/天体验Netflix/HBO等，固定车位避坑指南，首单5折福利。", youtubeId: "_qEkMcqfnwM", tags: ["流媒体", "省钱"] },
+      { title: "德区 Coinbase 合规开户全套攻略", date: "2025-12-10", category: "港美股&加密货币", description: "拿30€奖励，申请免费欧元借记卡，SEPA即时出入金实测。", youtubeId: "YoX2pNa8D6A", tags: ["Coinbase", "合规"] },
+      { title: "零门槛！免费德国个人IBAN账户", date: "2025-12-04", category: "银行&券商&交易所", description: "无需地址证明开通Monese，拿万事达卡，绑定微信支付宝消费。", youtubeId: "7UoMyqEG6DI", tags: ["Monese", "零门槛"] },
+      { title: "1美元VPS：德国原生IP高速直连", date: "2025-11-26", category: "机场&VPS", description: "法兰克福机房实测，超强IP解锁能力，一键脚本部署教程。", youtubeId: "PWReWVVHdTY", tags: ["极致性价比", "德国"] },
+      { title: "Bybit 亚太卡：限时返现10%", date: "2025-11-18", category: "港美股&加密货币", description: "支持大陆证件KYC，USD基础货币，绑定微信支付宝实测。", youtubeId: "APQEKOY9VR0", tags: ["Bybit", "亚太卡"] },
+      { title: "白嫖剪映专业版 SVIP 教程", date: "2025-11-11", category: "各类工具", description: "合规使用最新版，无需会员，无需登录，直接导出视频技巧。", youtubeId: "PWUOrEF7ggQ", tags: ["剪映", "生产力"] },
+      { title: "PayPal 免费白嫖 9 个顶级 AI 模型", date: "2025-11-04", category: "各类工具", description: "Perplexity Pro权益开通，全年免费使用GPT-4/Claude 3等。", youtubeId: "uCongDrN3OQ", tags: ["AI", "Perplexity"] }
+    ];
+
+    function renderArticles(data) {
+      const container = document.querySelector('.article-grid');
+      if (!container) return;
+      container.innerHTML = data.map(post => `
+        <article class="card p-4 flex flex-col gap-3">
+          <div class="flex items-center gap-2"><span class="tag">${post.category}</span><span class="text-dim uppercase text-[12px] font-mono">${post.date}</span></div>
+          <div class="flex-1"><h3 class="font-display font-semibold text-text mb-2 text-[18px] leading-snug">${post.title}</h3><p class="text-dim text-[15px] line-clamp-2">${post.description}</p></div>
+          <div class="iframe-wrap mb-2"><iframe src="https://www.youtube.com/embed/${post.youtubeId}" allowfullscreen></iframe></div>
+          <div class="flex items-center justify-between"><div class="flex gap-1.5 flex-wrap">${post.tags.map(tag => `<span class="tag" style="background:rgba(108,182,255,0.05);">${tag}</span>`).join('')}</div><div class="arrow-btn">→</div></div>
+        </article>
+      `).join('');
+    }
+
+    function renderHotPosts() {
+      const hotContainer = document.getElementById('hot-posts-container');
+      if (!hotContainer) return;
+      hotContainer.innerHTML = posts.slice(0, 4).map((post, i) => `
+        <div class="flex gap-3 items-start group cursor-pointer"><span class="font-display text-accentDim group-hover:text-accent shrink-0 text-[22px] leading-none mt-[1px]">0${i+1}</span><span class="text-dim group-hover:text-text text-[15px] leading-snug line-clamp-2">${post.title}</span></div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderArticles(posts);
+      renderHotPosts();
+      document.querySelectorAll('.nav-filter').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const cat = link.innerText.trim();
+          if (["首页","机场&VPS","手机&eSIM","银行&券商&交易所","港美股&加密货币","各类工具"].includes(cat)) {
+            e.preventDefault();
+            document.getElementById('main-title').innerText = cat === '首页' ? "最新文章" : cat;
+            renderArticles(cat === '首页' ? posts : posts.filter(p => p.category === cat));
+            window.scrollTo({top:0, behavior:'smooth'});
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
