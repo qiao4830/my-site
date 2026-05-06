@@ -13,9 +13,17 @@
       theme: {
         extend: {
           colors: {
-            bg: '#0b111a', surface: '#141c27', border: '#243244', borderHover: '#3a5475',
-            accent: '#6cb6ff', accentSoft: '#9fd0ff', accentDim: '#1c436e', text: '#e6eef8',
-            dim: '#a4b4c8', muted: '#7d8ea5', success: '#7dd3fc',
+            bg: '#0b111a',
+            surface: '#141c27',
+            border: '#243244',
+            borderHover: '#3a5475',
+            accent: '#6cb6ff',
+            accentSoft: '#9fd0ff',
+            accentDim: '#1c436e',
+            text: '#e6eef8',
+            dim: '#a4b4c8',
+            muted: '#7d8ea5',
+            success: '#7dd3fc',
           },
           fontFamily: {
             sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -42,67 +50,379 @@
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0b111a; }
     ::-webkit-scrollbar-thumb { background: #243244; border-radius: 999px; }
-    .nav-blur { backdrop-filter: blur(14px) saturate(180%); -webkit-backdrop-filter: blur(14px) saturate(180%); background: rgba(11, 17, 26, 0.84); border-bottom: 1px solid rgba(108,182,255,0.08); }
-    .nav-inner { max-width: 1400px; margin: 0 auto; min-height: 80px; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
-    .top-nav-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; display: flex; justify-content: center; }
+
+    .nav-blur {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(11, 17, 26, 0.78);
+      border-bottom: 1px solid rgba(108,182,255,0.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+    }
+    .nav-shell {
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 76px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: 0 18px;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+    .brand-logo-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(108,182,255,0.85), rgba(36,74,118,0.9));
+      box-shadow: 0 0 0 1px rgba(108,182,255,0.12);
+      flex-shrink: 0;
+    }
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      object-fit: contain;
+      background: #0b111a;
+      padding: 3px;
+    }
+    .brand-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: rgba(230,238,248,0.96);
+      white-space: nowrap;
+    }
+    .top-nav-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      display: flex;
+      justify-content: center;
+      min-width: 0;
+    }
     .top-nav-scroll::-webkit-scrollbar { display: none; }
-    .top-nav-list { min-width: max-content; }
-    .card { background: rgba(20, 28, 39, 0.94); border: 1px solid #243244; border-radius: 16px; transition: all .25s ease; }
-    .card:hover { border-color: #3a5475; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.34), 0 0 0 1px rgba(108,182,255,0.07); }
-    .tag { display: inline-flex; align-items: center; background: rgba(108,182,255,0.10); border: 1px solid rgba(108,182,255,0.18); border-radius: 999px; color: #9fd0ff; font-size: 13px; padding: 5px 11px; line-height: 1; white-space: nowrap; }
-    .arrow-btn { width: 32px; height: 32px; border: 1px solid #2a394b; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #93a7be; font-size: 14px; transition: all .2s ease; flex-shrink: 0; }
-    .card:hover .arrow-btn { background: rgba(108,182,255,0.10); border-color: #6cb6ff; color: #6cb6ff; }
-    .widget { background: rgba(20, 28, 39, 0.94); border: 1px solid #243244; border-radius: 16px; padding: 20px; }
-    .widget-title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6f8197; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
-    .bar { background: rgba(108,182,255,0.10); border-radius: 999px; overflow: hidden; }
-    .bar-fill { background: linear-gradient(90deg, #29578d, #6cb6ff); border-radius: 999px; height: 100%; transition: width 1s ease; }
-    .avatar-ring { background: conic-gradient(#6cb6ff 0%, #244a76 60%, #6cb6ff 100%); border-radius: 999px; padding: 2px; }
-    .avatar-inner { background: #0b111a; border-radius: 999px; padding: 3px; }
-    .cat-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1b2532; font-size: 15px; color: #a4b4c8; cursor: pointer; transition: color 0.2s ease; }
+    .top-nav-frame {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(108, 182, 255, 0.10);
+      background: rgba(255, 255, 255, 0.015);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 0 0 1px rgba(7, 12, 18, 0.22);
+    }
+    .top-nav-list {
+      min-width: max-content;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+    }
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      color: rgba(230,238,248,0.76);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-decoration: none;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: rgba(230,238,248,0.96);
+      background: rgba(108,182,255,0.06);
+    }
+    .nav-link.is-active {
+      color: #eef6ff;
+      background: rgba(108,182,255,0.14);
+      box-shadow: inset 0 0 0 1px rgba(108,182,255,0.14), 0 4px 14px rgba(108,182,255,0.06);
+    }
+    .nav-link.is-active::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 6px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(108,182,255,0.15), #6cb6ff, rgba(108,182,255,0.15));
+    }
+
+    .card {
+      background: rgba(20, 28, 39, 0.94);
+      border: 1px solid #243244;
+      border-radius: 16px;
+      transition: all .25s ease;
+    }
+    .card:hover {
+      border-color: #3a5475;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.34), 0 0 0 1px rgba(108,182,255,0.07);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(108,182,255,0.10);
+      border: 1px solid rgba(108,182,255,0.18);
+      border-radius: 999px;
+      color: #9fd0ff;
+      font-size: 13px;
+      padding: 5px 11px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .arrow-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #2a394b;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #93a7be;
+      font-size: 14px;
+      transition: all .2s ease;
+      flex-shrink: 0;
+    }
+    .card:hover .arrow-btn {
+      background: rgba(108,182,255,0.10);
+      border-color: #6cb6ff;
+      color: #6cb6ff;
+    }
+    .widget {
+      background: rgba(20, 28, 39, 0.94);
+      border: 1px solid #243244;
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .widget-title {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #6f8197;
+      margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .bar {
+      background: rgba(108,182,255,0.10);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      background: linear-gradient(90deg, #29578d, #6cb6ff);
+      border-radius: 999px;
+      height: 100%;
+      transition: width 1s ease;
+    }
+    .avatar-ring {
+      background: conic-gradient(#6cb6ff 0%, #244a76 60%, #6cb6ff 100%);
+      border-radius: 999px;
+      padding: 2px;
+    }
+    .avatar-inner {
+      background: #0b111a;
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .cat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #1b2532;
+      font-size: 15px;
+      color: #a4b4c8;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
     .cat-item:last-child { border-bottom: none; }
     .cat-item:hover { color: #e6eef8; }
-    .iframe-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #0d1520; border: 1px solid #223247; }
-    .iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-    .page-wrap { max-width: 1400px; margin: 0 auto; padding: 100px 16px 48px; }
-    .layout-grid { display: grid; grid-template-columns: 260px 1fr 300px; gap: 24px; align-items: start; }
-    .left-col, .right-col { position: sticky; top: 96px; }
-    .article-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 768px) {
-      .article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .iframe-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #0d1520;
+      border: 1px solid #223247;
     }
+    .iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .page-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 16px 48px;
+    }
+    .layout-grid {
+      display: grid;
+      grid-template-columns: minmax(0,2.2fr) minmax(0,7.2fr) minmax(0,2.6fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .left-col, .right-col {
+      position: sticky;
+      top: 96px;
+    }
+    .article-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1200px) {
+  .nav-shell {
+    min-height: 86px;
+    gap: 28px;
+  }
+
+  .top-nav-frame {
+    padding: 8px;
+  }
+
+  .top-nav-list {
+    gap: 10px;
+  }
+
+  .nav-link {
+    height: 48px;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .brand-text {
+    font-size: 18px;
+  }
+
+  .brand-logo-wrap {
+    width: 38px;
+    height: 38px;
+  }
+}
+
     @media (max-width: 1279px) {
-      .layout-grid { grid-template-columns: minmax(0, 1fr); }
-      .left-col, .right-col { position: static; top: auto; }
+      .layout-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .left-col, .right-col {
+        position: static;
+        top: auto;
+      }
       .left-col { order: 1; }
       main { order: 2; }
       .right-col { order: 3; }
     }
+
+    @media (max-width: 900px) {
+      .nav-shell {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+        min-height: auto;
+      }
+      .brand-mark {
+        justify-self: start;
+      }
+      .top-nav-scroll {
+        justify-content: flex-start;
+      }
+      .top-nav-frame {
+        padding: 4px;
+      }
+      .top-nav-list {
+        margin: 0;
+        padding-bottom: 2px;
+      }
+      .nav-link {
+        height: 36px;
+        padding: 0 12px;
+        font-size: 14px;
+      }
+    }
+
     @media (max-width: 767px) {
-      .nav-inner { min-height: 64px; padding: 10px 12px; justify-content: flex-start; }
-      .top-nav-scroll { justify-content: flex-start; }
-      .page-wrap { padding: 88px 12px 36px; }
-      .widget { padding: 16px; border-radius: 14px; }
-      .card { padding: 14px !important; border-radius: 14px; }
-      .tag { font-size: 12px; padding: 5px 9px; }
-      .arrow-btn { width: 30px; height: 30px; font-size: 13px; }
-      .cat-item { font-size: 14px; padding: 9px 0; }
+      .page-wrap {
+        padding: 108px 12px 36px;
+      }
+      .widget {
+        padding: 16px;
+        border-radius: 14px;
+      }
+      .card {
+        padding: 14px !important;
+        border-radius: 14px;
+      }
+      .tag {
+        font-size: 12px;
+        padding: 5px 9px;
+      }
+      .arrow-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+      }
+      .cat-item {
+        font-size: 14px;
+        padding: 9px 0;
+      }
+      .brand-text {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 <body class="min-h-screen text-text">
 
   <header class="nav-blur fixed top-0 left-0 right-0 z-50">
-    <div class="nav-inner">
-      <nav class="top-nav-scroll">
-        <ul class="top-nav-list flex flex-row items-center justify-center gap-5 md:gap-8 whitespace-nowrap px-1 sm:px-2">
-          <li><a href="#" class="nav-filter text-[16px] md:text-[19px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">首页</a></li>
-          <li><a href="#" class="nav-filter text-[15px] md:text-[18px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">机场&VPS</a></li>
-          <li><a href="#" class="nav-filter text-[15px] md:text-[18px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">手机&eSIM</a></li>
-          <li><a href="#" class="nav-filter text-[15px] md:text-[18px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">银行&券商&交易所</a></li>
-          <li><a href="#" class="nav-filter text-[15px] md:text-[18px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">港美股&加密货币</a></li>
-          <li><a href="#" class="nav-filter text-[15px] md:text-[18px] font-bold text-white/90 hover:text-sky-400 transition-all inline-block py-2">各类工具</a></li>
-        </ul>
+    <div class="nav-shell">
+      <a href="#" class="brand-mark nav-filter">
+        <span class="brand-logo-wrap">
+          <img src="./logo.jpg" alt="小帆船 Logo" class="brand-logo" onerror="this.onerror=null;this.src='./image.jpg';">
+        </span>
+        <span class="brand-text">小帆船-官方博客</span>
+      </a>
+
+      <nav class="top-nav-scroll" aria-label="主导航">
+        <div class="top-nav-frame">
+          <ul class="top-nav-list">
+            <li><a href="#" class="nav-link nav-filter is-active">首页</a></li>
+            <li><a href="#" class="nav-link nav-filter">机场&VPS</a></li>
+            <li><a href="#" class="nav-link nav-filter">手机&eSIM</a></li>
+            <li><a href="#" class="nav-link nav-filter">银行&券商&交易所</a></li>
+            <li><a href="#" class="nav-link nav-filter">港美股&加密货币</a></li>
+            <li><a href="#" class="nav-link nav-filter">各类工具</a></li>
+          </ul>
+        </div>
       </nav>
+
+      <div class="hidden lg:block"></div>
     </div>
   </header>
 
@@ -122,9 +442,9 @@
               <div class="text-dim mt-1 text-[13px] md:text-[14px]">数字出海全链路实操</div>
             </div>
             <div class="flex gap-2 flex-wrap justify-center mt-1">
-              <span class="tag">eSIM</span><span class="tag">VPN</span><span class="tag">券商</span><span class="tag">交易所</span><span class="tag">加密货币</span>
+              <span class="tag">eSIM</span><span class="tag">VPN</span><span class="tag">券商</span><span class="tag">交易所</span><span class="tag">加密货币</span><span class="tag">银行</span><span class="tag">港美股</span><span class="tag">工具</span>
             </div>
-            <p class="text-dim mt-1 text-[14px] md:text-[15px] leading-7 md:leading-8">数字出海全链路实操，让跨境金融与网络连接更简单。</p>
+            <p class="text-dim mt-1 text-[14px] md:text-[15px] leading-7 md:leading-8">让跨境金融与网络连接更简单</p>
           </div>
         </div>
 
@@ -133,21 +453,11 @@
             <img src="./logo.jpg" alt="logo" class="w-4 h-4 rounded-full object-cover" onerror="this.style.display='none'">
             <span>分类</span>
           </div>
-          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300">
-            <span class="group-hover:text-accent transition-colors">机场&VPS</span>
-          </div>
-          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300">
-            <span class="group-hover:text-accent transition-colors">手机&eSIM</span>
-          </div>
-          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300">
-            <span class="group-hover:text-accent transition-colors">银行&券商&交易所</span>
-          </div>
-          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300">
-            <span class="group-hover:text-accent transition-colors">港美股&加密货币</span>
-          </div>
-          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300">
-            <span class="group-hover:text-accent transition-colors">各类工具</span>
-          </div>
+          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300"><span class="group-hover:text-accent transition-colors">机场&VPS</span></div>
+          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300"><span class="group-hover:text-accent transition-colors">手机&eSIM</span></div>
+          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300"><span class="group-hover:text-accent transition-colors">银行&券商&交易所</span></div>
+          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300"><span class="group-hover:text-accent transition-colors">港美股&加密货币</span></div>
+          <div class="cat-item nav-filter group hover:pl-3 transition-all duration-300"><span class="group-hover:text-accent transition-colors">各类工具</span></div>
         </div>
 
         <div class="widget">
@@ -157,24 +467,15 @@
           </div>
           <div class="flex flex-col">
             <a href="https://t.me/vipxiaofanchuan" target="_blank" rel="noopener noreferrer" class="cat-item group flex items-center justify-between !py-2.5 border-none">
-              <span class="flex items-center gap-2.5">
-                <i class="fab fa-telegram text-[16px] text-sky-400"></i>
-                <span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">Telegram 交流群</span>
-              </span>
+              <span class="flex items-center gap-2.5"><i class="fab fa-telegram text-[16px] text-sky-400"></i><span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">Telegram 交流群</span></span>
               <i class="fas fa-angle-right text-dim text-[12px] opacity-0 group-hover:opacity-100 transition-all"></i>
             </a>
             <a href="https://www.youtube.com/@CNXiaoFanChuan" target="_blank" rel="noopener noreferrer" class="cat-item group flex items-center justify-between !py-2.5 border-none">
-              <span class="flex items-center gap-2.5">
-                <i class="fab fa-youtube text-[16px] text-red-500"></i>
-                <span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">YouTube 频道</span>
-              </span>
+              <span class="flex items-center gap-2.5"><i class="fab fa-youtube text-[16px] text-red-500"></i><span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">YouTube 频道</span></span>
               <i class="fas fa-angle-right text-dim text-[12px] opacity-0 group-hover:opacity-100 transition-all"></i>
             </a>
             <a href="mailto:qiao4830@hotmail.com" class="cat-item group flex items-center justify-between !py-2.5 border-none">
-              <span class="flex items-center gap-2.5">
-                <i class="fas fa-envelope text-[16px] text-yellow-500"></i>
-                <span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">商务合作</span>
-              </span>
+              <span class="flex items-center gap-2.5"><i class="fas fa-envelope text-[16px] text-yellow-500"></i><span class="text-[14px] md:text-[15px] group-hover:text-white transition-colors">商务合作</span></span>
               <i class="fas fa-angle-right text-dim text-[15px] opacity-0 group-hover:opacity-100 transition-all"></i>
             </a>
           </div>
@@ -247,6 +548,14 @@
     const increment = 8;
     let currentFilteredPosts = [];
 
+    function setActiveNav(category) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const text = link.innerText.trim();
+        const active = category === '首页' ? text === '首页' : text === category;
+        link.classList.toggle('is-active', active);
+      });
+    }
+
     function renderArticles(isAppend = false) {
       const container = document.querySelector('.article-grid');
       const loadMoreBtn = document.getElementById('load-more-container');
@@ -261,7 +570,6 @@
 
       const html = itemsToShow.map(post => {
         let previewText = "";
-
         if (post.description && post.description.includes('<div')) {
           previewText = '德国号码 + 德国原生流量 + 德区应用环境，国行手机数字出海全链路实操方案实测。';
         } else {
@@ -274,21 +582,17 @@
             <span class="tag">${post.category}</span>
             <span class="text-dim uppercase text-[11px] md:text-[12px] font-mono">${post.date}</span>
           </div>
-
           <div class="flex-1 min-w-0">
             <h3 class="font-display font-semibold text-text mb-2 text-[16px] md:text-[18px] leading-snug break-words">${post.title}</h3>
             <p class="text-dim text-[14px] md:text-[15px] line-clamp-2 leading-6">${previewText}</p>
           </div>
-
           <div class="iframe-wrap mb-2">
             <iframe src="https://www.youtube.com/embed/${post.youtubeId}" loading="lazy" allowfullscreen></iframe>
           </div>
-
           <div class="flex items-center justify-between gap-3">
             <div class="flex gap-1.5 flex-wrap min-w-0">
               ${post.tags ? post.tags.map(tag => `<span class="tag" style="background:rgba(108,182,255,0.05);">${tag}</span>`).join('') : ''}
             </div>
-
             <a href="details.html?id=${post.youtubeId}" class="arrow-btn" title="查看视频说明">
               <i class="fas fa-arrow-right"></i>
             </a>
@@ -320,6 +624,7 @@
         currentFilteredPosts = [...posts];
         renderArticles();
         renderHotPosts();
+        setActiveNav('首页');
       } else {
         console.error('data.js 加载失败或格式错误');
       }
@@ -333,7 +638,10 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
 
-          let cat = link.tagName === 'A' ? link.innerText.trim() : (link.querySelector('span')?.innerText.trim() || '');
+          let cat = link.tagName === 'A'
+            ? link.innerText.trim()
+            : (link.querySelector('span')?.innerText.trim() || '');
+
           let filterCat = (cat === '港美股/加密货币') ? '港美股&加密货币' : cat;
 
           currentFilteredPosts = (filterCat === '首页' || filterCat === '小帆船' || !filterCat)
@@ -341,6 +649,7 @@
             : posts.filter(p => p.category === filterCat);
 
           renderArticles(false);
+          setActiveNav(filterCat === '小帆船' ? '首页' : filterCat || '首页');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       });
