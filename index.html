@@ -569,12 +569,9 @@
       const itemsToShow = currentFilteredPosts.slice(isAppend ? currentIndex - increment : 0, currentIndex);
 
       const html = itemsToShow.map(post => {
-        let previewText = "";
-        if (post.description && post.description.includes('<div')) {
-          previewText = '德国号码 + 德国原生流量 + 德区应用环境，国行手机数字出海全链路实操方案实测。';
-        } else {
-          previewText = post.description || '暂无简介';
-        }
+        let previewText = (post.description && post.description.includes('<div')) 
+          ? '数字出海全链路实操方案实测，包含网络环境优化及跨境金融工具使用。' 
+          : (post.description || '暂无简介');
 
         return `
         <article class="card p-4 md:p-4 flex flex-col gap-3 min-w-0">
@@ -593,7 +590,8 @@
             <div class="flex gap-1.5 flex-wrap min-w-0">
               ${post.tags ? post.tags.map(tag => `<span class="tag" style="background:rgba(108,182,255,0.05);">${tag}</span>`).join('') : ''}
             </div>
-            <a href="details.html?id=${post.youtubeId}" class="arrow-btn" title="查看视频说明">
+            <!-- 添加了 target="_blank" -->
+            <a href="details.html?id=${post.youtubeId}" target="_blank" class="arrow-btn" title="查看视频说明">
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
@@ -612,7 +610,7 @@
       if (!hotContainer || typeof posts === 'undefined') return;
 
       hotContainer.innerHTML = posts.slice(0, 4).map((post, i) => `
-        <div class="flex gap-3 items-start group cursor-pointer py-1" onclick="window.location.href='details.html?id=${post.youtubeId}'">
+        <div class="flex gap-3 items-start group cursor-pointer py-1" onclick="window.open('details.html?id=${post.youtubeId}', '_blank')">
           <span class="font-display text-accentDim group-hover:text-accent shrink-0 text-[15px] md:text-[18px] leading-none mt-[2px]">0${i + 1}</span>
           <span class="text-dim group-hover:text-text text-[13px] md:text-[14px] leading-[1.45] line-clamp-2">${post.title}</span>
         </div>
