@@ -3454,4 +3454,32 @@ const posts = [
     </div>
   `
 },
-];
+// ... 上面是 ID 为 1 的文章内容
+  description: `<div>原本的内容...</div>`
+ // <--- 1. 这里一定要加逗号！
+
+{
+  id: 0,
+  title: "Privacy Policy",
+  date: "2026-05-11",
+  category: "Policy",
+  summary: "SailTech 网站隐私政策，包含信息收集与 Cookies 使用说明。",
+  description: `
+    <div class="space-y-6 text-dim leading-relaxed">
+      <section>
+        <h3 class="text-accent font-bold text-lg mb-2">Privacy Policy for SailTech</h3>
+        <p>At SailTech (sailtech.top), accessible from https://sailtech.top, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SailTech and how we use it.</p>
+      </section>
+      <section>
+        <h3 class="text-accentSoft font-bold mb-3">Cookies and Web Beacons</h3>
+        <p>Like any other website, SailTech uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited.</p>
+      </section>
+      <section>
+        <h3 class="text-accentSoft font-bold mb-3">Consent</h3>
+        <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+      </section>
+    </div>
+  `
+} // <--- 2. 这是最后一项
+]; // <--- 3. 确保有这个方括号和分号结尾
+
